@@ -16,8 +16,9 @@ def correlate(img, model):
         new_img[i].insert(0, mean_val)
         new_img[i].append(mean_val)
     new_img = np.array(new_img)
-    reserve_img = img.copy().astype(float)
+    second_image = img.copy().astype(float)
 
+    # Move window-by-window
     for i in range(1, size[0] + 1, 1):
         for j in range(1, size[1] + 1, 1):
             x = new_img[i-1:i+2, j-1:j+2]  # mask 3x3
@@ -28,9 +29,11 @@ def correlate(img, model):
             if sum_of_sqr == 0:
                 sum_of_sqr = 1
             b_correlation_function = 0
+
+            # Collect norm corr func
             for k in range(0, len(x), 1):
                 for l in range(0, len(x[0]), 1):
                     b_correlation_function += x[k][l] * t[k][l]
             b_correlation_function /= sqrt(sum_of_sqr)
-            reserve_img[i-1][j-1] = int(b_correlation_function*255)
-    return reserve_img
+            second_image[i-1][j-1] = int(b_correlation_function*255)
+    return second_image
