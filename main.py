@@ -69,8 +69,8 @@ if __name__ == '__main__':
     # 5. Make correlate
     # ==================================================================
     correlate_field_T_model1 = correlate(img_with_objects_T, MODEL_T)
-    correlate_field_TandL_model1 = correlate(img_with_T_and_inverse_T_random, MODEL_T)
-    correlate_field_TandL_model2 = correlate(img_with_T_and_inverse_T_random, MODEL_INVERSE_T)
+    correlate_field_both_object_types_model1 = correlate(img_with_T_and_inverse_T_random, MODEL_T)
+    correlate_field_both_object_types_model2 = correlate(img_with_T_and_inverse_T_random, MODEL_INVERSE_T)
 
     correlate_field_noise_T_model1 = correlate(noised_img_with_T, MODEL_T)
     correlate_field_noise_both_object_types_model1 = correlate(noised_img_with_both_object_types, MODEL_T)
@@ -80,11 +80,11 @@ if __name__ == '__main__':
     # 6. Make contrast
     # ==================================================================
     max_in_T = correlate_field_T_model1.max()
-    max_in_L = correlate_field_TandL_model2.max()
+    max_in_L = correlate_field_both_object_types_model2.max()
 
     contrast1 = linear_contrast(correlate_field_T_model1, max_in_T)
-    contrast2 = linear_contrast(correlate_field_TandL_model1, max_in_T)
-    contrast3 = linear_contrast(correlate_field_TandL_model2, max_in_T)
+    contrast2 = linear_contrast(correlate_field_both_object_types_model1, max_in_T)
+    contrast3 = linear_contrast(correlate_field_both_object_types_model2, max_in_T)
 
     noise_contrast1 = linear_contrast(correlate_field_noise_T_model1, max_in_T)
     noise_contrast2 = linear_contrast(correlate_field_noise_both_object_types_model1, max_in_T)
@@ -114,7 +114,7 @@ if __name__ == '__main__':
                          'model T')
     show()
     create_fields_figure(img_with_T_and_inverse_T_random,
-                         correlate_field_TandL_model1,
+                         correlate_field_both_object_types_model1,
                          border2,
                          noised_img_with_both_object_types,
                          correlate_field_noise_both_object_types_model1,
@@ -122,7 +122,7 @@ if __name__ == '__main__':
                          'model T')
     show()
     create_fields_figure(img_with_T_and_inverse_T_random,
-                         correlate_field_TandL_model2,
+                         correlate_field_both_object_types_model2,
                          border3,
                          noised_img_with_both_object_types,
                          correlate_field_noise_both_object_types_model2,
